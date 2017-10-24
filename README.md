@@ -8,7 +8,13 @@
 - kubectl
 - git lfs
 
+## Building
 ```ssh
 docker build -t urashidmalik/jenkins-jnlp-kubectl-docker:latest .
 docker push  urashidmalik/jenkins-jnlp-kubectl-docker:latest
+```
+
+## Testing
+```ssh
+docker run -it --entrypoint /bin/bash   urashidmalik/jenkins-jnlp-kubectl-docker
 ```
