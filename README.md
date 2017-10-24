@@ -7,5 +7,8 @@
 - Docker
 - kubectl
 - git lfs
+
+```ssh
 docker build -t urashidmalik/jenkins-jnlp-kubectl-docker:latest .
 docker push  urashidmalik/jenkins-jnlp-kubectl-docker:latest
+```
