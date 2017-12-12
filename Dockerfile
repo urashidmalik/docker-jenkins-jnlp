@@ -1,5 +1,10 @@
 FROM jenkinsci/slave:alpine
 
+###########################
+# Installing Packages
+###########################
+
+
 USER root
 RUN apk add --no-cache \
 ca-certificates \
@@ -9,8 +14,8 @@ openssl \
 mongodb=3.4.4-r0 \
 nodejs=6.10.3-r1 \
 python \
-go=1.8.3-r0 \
-maven=3.3.9-r1
+go && \
+apk add maven --update-cache --repository http://dl-3.alpinelinux.org/alpine/v3.7/community/  --allow-untrusted
 
 #RUN apk add --no-cache tar bash
 #
@@ -25,6 +30,11 @@ maven=3.3.9-r1
 #  && tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 \
 #  && rm -f /tmp/apache-maven.tar.gz \
 #  && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
+
+
+######################################################
+# Installing Docker
+######################################################
 
 ENV DOCKER_BUCKET get.docker.com
 ENV DOCKER_VERSION 17.04.0-ce
@@ -45,6 +55,9 @@ RUN chmod +x ./kubectl
 RUN mv ./kubectl /usr/local/bin/kubectl
 
 
+######################################################
+# Installing GIT-LFS Support
+######################################################
 RUN apk --no-cache add openssl git curl \
     && curl -sLO https://github.com/github/git-lfs/releases/download/v2.3.4/git-lfs-linux-amd64-2.3.4.tar.gz \
     && tar zxvf git-lfs-linux-amd64-2.3.4.tar.gz \
